@@ -471,8 +471,9 @@ class Visualizer:
 def main():
     config = configparser.RawConfigParser()
     config.read('config.cfg')
+    log_file = config.get('General', 'log_file')
     
-    log.basicConfig(format="[ %(levelname)s ] %(asctime)-15s %(message)s",
+    log.basicConfig(filename=log_file, filemode='w', format="[ %(levelname)s ] %(asctime)-15s %(message)s",
                     level=log.INFO if not config.getboolean('Inference', 'do_verbose') else log.DEBUG, stream=sys.stdout)
 
 

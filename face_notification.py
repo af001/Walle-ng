@@ -18,7 +18,7 @@ class FaceNotification(Module):
 
     def send_notification(self, msg):
         # Data to send to API Gateway
-        data = {'message': msg} 
+        data = {'message': msg.capitalize()} 
         headers = {'x-api-key': self.api_key, 'Content-Type': 'application/json'}
 
         # sending post request and saving response as response object 

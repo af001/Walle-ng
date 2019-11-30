@@ -5,4 +5,3 @@ dataset/
 __pycache__/
 *.py[cod]
 
-config.cfg

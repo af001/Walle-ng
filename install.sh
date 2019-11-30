@@ -33,7 +33,7 @@ source ~/.bashrc
 echo
 echo -e "${red} > Adding USB rules for the Movidius${end}"
 sudo usermod -a -G users "$(whoami)"
-/opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh
+sh /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh
 
 # Download additional dependencies
 echo
@@ -75,11 +75,15 @@ read response
 if [[ $response = "y" || $response = "Y" ]]; then
 	echo -ne "${red}[+] Enter API Gateway endpoint URL: ${end}"
 	read url
-	sed -i "s/<api_gateway_endpoint_url>/$url/g" config.cfg
+	sed -i -e "s|<api_gateway_endpoint_url>|$url|g" config.cfg
 	echo -ne "${red}[+] Enter API Gateway API key: ${end}"	
 	read key
-	sed -i "s/<api_gateway_api_key>/$key/g" config.cfg
+	sed -i -e "s/<api_gateway_api_key>/$key/g" config.cfg
 fi
+
+# Updating keyboard mapping to us
+sudo sed -i 's/XKBLAYOUT="gb"/XKBLAYOUT="us"/g' /etc/default/keyboard
+sudo dpkg-reconfigure keyboard-configuration
 
 # Reboot
 echo

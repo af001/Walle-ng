@@ -1,8 +1,8 @@
 #!/bin/bash
 
-yel=$'\e[1;33m'
-red=$'\e[1;31m'
-end=$'\e[0m'
+yel=$"\e[1;33m"
+red=$"\e[1;31m"
+end=$"\e[0m"
 
 echo -e "${red}[+] Starting install script${end}"
 sleep 2
@@ -44,24 +44,24 @@ pip3 install adafruit-blinka adafruit-circuitpython-pca9685 adafruit-circuitpyth
 # Modify config.txt in /boot
 echo
 echo -e "${red} > Modifying /boot/config.txt${end}"
-sudo sed -i 's/^dtparam=i2s=on/#dtparam=i2s=on/g' /boot/config.txt
-sudo sed -i 's/^dtparam=audio=on/#dtparam=audio=on/g' /boot/config.txt
-sudo sed -i '/^\[pi4\]/i # GPIO IRQ\n' /boot/config.txt
-sudo sed -i '/^# GPIO IRQ/a dtoverlay=gpio-no-irq' /boot/config.txt
+sudo sed -i "s/^dtparam=i2s=on/#dtparam=i2s=on/g" /boot/config.txt
+sudo sed -i "s/^dtparam=audio=on/#dtparam=audio=on/g" /boot/config.txt
+sudo sed -i "/^\[pi4\]/i # GPIO IRQ\n" /boot/config.txt
+sudo sed -i "/^# GPIO IRQ/a dtoverlay=gpio-no-irq" /boot/config.txt
 
 # Ask for headless run, i.e. start on boot
 echo
 echo -ne "${red}[!] Do you want to run in headless mode? [y/N] ${end}"
 read headless
 
-if [[ $headless = 'y' || $headless = 'Y' ]]; then
+if [[ $headless = "y" || $headless = "Y" ]]; then
         echo -ne "${red} > Enabling headless mode in config.cfg${end}"
-	sed -i 's/do_output      =True/do_output      =False/g' config.cfg
+	sed -i "s/do_output      =True/do_output      =False/g" config.cfg
 	echo
 	echo -ne "${red}[!] Do you want to run in headless mode? [y/N] ${end}"
 	read boot
 
-	if [[ $boot = 'y' || $boot = 'Y' ]]; then
+	if [[ $boot = "y" || $boot = "Y" ]]; then
         	echo -ne "${red} > Enabling walle-ng to run on boot${end}"
         	# Add walle.service to /etc/systemd/system
 	fi
@@ -72,13 +72,13 @@ echo
 echo -ne "${red}[!] Do you want to set up AWS notifications? [y/N] ${end}"
 read response
 
-if [[ $response = 'y' || $response = 'Y' ]]; then
+if [[ $response = "y" || $response = "Y" ]]; then
 	echo -ne "${red}[+] Enter API Gateway endpoint URL: ${end}"
 	read url
-	sed -i 's/<api_gateway_endpoint_url>/$url/g' config.cfg
+	sed -i "s/<api_gateway_endpoint_url>/$url/g" config.cfg
 	echo -ne "${red}[+] Enter API Gateway API key: ${end}"	
 	read key
-	sed -i 's/<api_gateway_api_key>/$key/g' config.cfg
+	sed -i "s/<api_gateway_api_key>/$key/g" config.cfg
 fi
 
 # Reboot

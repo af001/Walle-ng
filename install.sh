@@ -44,10 +44,10 @@ pip3 install adafruit-blinka adafruit-circuitpython-pca9685 adafruit-circuitpyth
 # Modify config.txt in /boot
 echo
 echo -e "${red} > Modifying /boot/config.txt${end}"
-sed -i 's/^dtparam=i2s=on/#dtparam=i2s=on/g' /boot/config.txt
-sed -i 's/^dtparam=audio=on/#dtparam=audio=on/g' /boot/config.txt
-sed -i '/^\[pi4\]/i # GPIO IRQ\n' /boot/config.txt
-sed -i '/^# GPIO IRQ/a dtoverlay=gpio-no-irq' /boot/config.txt
+sudo sed -i 's/^dtparam=i2s=on/#dtparam=i2s=on/g' /boot/config.txt
+sudo sed -i 's/^dtparam=audio=on/#dtparam=audio=on/g' /boot/config.txt
+sudo sed -i '/^\[pi4\]/i # GPIO IRQ\n' /boot/config.txt
+sudo sed -i '/^# GPIO IRQ/a dtoverlay=gpio-no-irq' /boot/config.txt
 
 # Ask for headless run, i.e. start on boot
 echo

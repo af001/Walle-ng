@@ -1,0 +1,14 @@
+[Unit]
+Description=Walle face tracker
+After=network.target
+
+[Service]
+ExecStart=/home/pi/Walle-ng/config/headless_start.sh
+WorkingDirectory=/home/pi/Walle-ng
+StandardOutput=inherit
+StandardError=inherit
+Restart=on-failure
+User=pi
+
+[Install]
+WantedBy=multi-user.target

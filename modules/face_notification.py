@@ -18,13 +18,13 @@ class FaceNotification(Module):
     def send_notification(self, msg):
         # Data to send to API Gateway
         data = {'message': msg.capitalize()} 
-        headers = {'x-api-key': self.api_key, 'Content-Type': 'application/json'}
+        headers = {'x-api-key': self.api_key}
 
         # sending post request and saving response as response object 
-        r = requests.post(url=self.url, data=json.dumps(data), headers=headers) 
+        r = requests.post(url=self.url, data=data, headers=headers) 
         
-        if r.status_code == 200:
-            print('[DEBUG] Recived: {}'.format(r.status_code))
+        #if r.status_code == 200:
+        print('[DEBUG] Recived: {}'.format(r.status_code))
         
         self.notified = True
         self.now = datetime.datetime.now()

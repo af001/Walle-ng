@@ -1,15 +1,14 @@
 import requests
-import json
 import datetime
-from ie_module import Module
+from modules.ie_module import Module
 
 class FaceNotification(Module):
     UNKNOWN_ID = -1
 
-    def __init__(self, url, api_key):
-        super(FaceNotification, self).__init__(url, api_key)
+    def __init__(self, url):
+        super(FaceNotification, self).__init__(url)
         self.url = url
-        self.api_key = api_key
+        self.api_key = None
         self.faces_database = None
         self.notified = False
         self.now = datetime.datetime.now()
@@ -62,6 +61,9 @@ class FaceNotification(Module):
     
     def set_faces_database(self, database):
         self.faces_database = database
+
+    def set_api_key(self, key):
+        self.api_key = key
 
     def get_identity_label(self, id):
         if not self.faces_database or id == self.UNKNOWN_ID:

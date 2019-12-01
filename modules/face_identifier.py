@@ -17,8 +17,8 @@
 import cv2
 import numpy as np
 
-from utils import cut_rois, resize_input
-from ie_module import Module
+from modules.utils import cut_rois, resize_input
+from modules.ie_module import Module
 
 class FaceIdentifier(Module):
     # Taken from the description of the model:

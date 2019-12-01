@@ -22,7 +22,7 @@ import numpy as np
 
 from scipy.optimize import linear_sum_assignment
 from scipy.spatial.distance import cosine
-from face_detector import FaceDetector
+from modules.face_detector import FaceDetector
 
 class FacesDatabase:
     IMAGE_EXTENSIONS = ['jpg', 'png']

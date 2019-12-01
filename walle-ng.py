@@ -101,8 +101,9 @@ class FrameProcessor:
         log.info('Database was built, registered {} identities'.format(len(self.faces_database)))
 
         if self.notify:
-            self.face_notifier = FaceNotification(self.url, self.api_key)
+            self.face_notifier = FaceNotification(self.url)
             self.face_notifier.set_faces_database(self.faces_database)
+            self.face_notifier.set_api_key(self.api_key)
             log.info('Loaded Notifier')
 
         self.allow_grow = self.do_grow and not self.display
@@ -473,7 +474,7 @@ def main():
     log_file = config.get('General', 'log_file')
     
     log.basicConfig(filename=log_file, filemode='w', format="[ %(levelname)s ] %(asctime)-15s %(message)s",
-                    level=log.INFO if not config.getboolean('Inference', 'do_verbose') else log.DEBUG, stream=sys.stdout)
+                    level=log.INFO if not config.getboolean('Inference', 'do_verbose') else log.DEBUG)
 
 
     visualizer = Visualizer(config)

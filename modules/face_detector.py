@@ -16,8 +16,8 @@
 
 import numpy as np
 from numpy import clip
-from ie_module import Module
-from utils import resize_input
+from modules.ie_module import Module
+from modules.utils import resize_input
 
 class FaceDetector(Module):
     class Result:

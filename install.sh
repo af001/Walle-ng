@@ -56,14 +56,16 @@ read headless
 
 if [[ $headless = "y" || $headless = "Y" ]]; then
         echo -ne "${red} > Enabling headless mode in config.cfg${end}"
-	sed -i "s/do_output      =True/do_output      =False/g" config.cfg
+	sed -i "s/do_output      =True/do_output      =False/g" config/config.cfg
 	echo
-	echo -ne "${red}[!] Do you want to run in headless mode? [y/N] ${end}"
+	echo -ne "${red}[!] Do you create a startup service for walle-ng? [y/N] ${end}"
 	read boot
 
 	if [[ $boot = "y" || $boot = "Y" ]]; then
         	echo -ne "${red} > Enabling walle-ng to run on boot${end}"
-        	# Add walle.service to /etc/systemd/system
+        	sudo cp config/walled.service /etc/systemd/system
+		sudo systemctl daemon-reload
+		sudo systemctl enable walled.service
 	fi
 fi
 
@@ -75,10 +77,10 @@ read response
 if [[ $response = "y" || $response = "Y" ]]; then
 	echo -ne "${red}[+] Enter API Gateway endpoint URL: ${end}"
 	read url
-	sed -i -e "s|<api_gateway_endpoint_url>|$url|g" config.cfg
+	sed -i -e "s|<api_gateway_endpoint_url>|$url|g" config/config.cfg
 	echo -ne "${red}[+] Enter API Gateway API key: ${end}"	
 	read key
-	sed -i -e "s/<api_gateway_api_key>/$key/g" config.cfg
+	sed -i -e "s/<api_gateway_api_key>/$key/g" config/config.cfg
 fi
 
 # Updating keyboard mapping to us

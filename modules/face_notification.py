@@ -24,7 +24,7 @@ class FaceNotification(Module):
         r = requests.post(url=self.url, data=data, headers=headers) 
         
         #if r.status_code == 200:
-        print('[DEBUG] Recived: {}'.format(r.status_code))
+            #print('[DEBUG] Recived: {}'.format(r.status_code))
         
         self.notified = True
         self.now = datetime.datetime.now()

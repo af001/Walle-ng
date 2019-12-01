@@ -22,17 +22,16 @@ import sys
 import time
 import datetime
 import configparser
-
 import cv2
 import numpy as np
 
 from openvino.inference_engine import IENetwork
-from ie_module import InferenceContext
-from landmarks_detector import LandmarksDetector
-from face_detector import FaceDetector
-from faces_database import FacesDatabase
-from face_identifier import FaceIdentifier
-from face_notification import FaceNotification
+from modules.ie_module import InferenceContext
+from modules.landmarks_detector import LandmarksDetector
+from modules.face_detector import FaceDetector
+from modules.faces_database import FacesDatabase
+from modules.face_identifier import FaceIdentifier
+from modules.face_notification import FaceNotification
 
 import busio
 from board import SCL, SDA
@@ -470,7 +469,7 @@ class Visualizer:
 
 def main():
     config = configparser.RawConfigParser()
-    config.read('config.cfg')
+    config.read('config/config.cfg')
     log_file = config.get('General', 'log_file')
     
     log.basicConfig(filename=log_file, filemode='w', format="[ %(levelname)s ] %(asctime)-15s %(message)s",

@@ -1,7 +1,2 @@
-dataset/
-*.jpg
-*.png
-
 __pycache__/
 *.py[cod]
-
